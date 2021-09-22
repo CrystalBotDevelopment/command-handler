@@ -1,7 +1,9 @@
-import chalk from 'chalk';
-import { Command } from 'commander';
-import { CommandLoader } from '..';
-import { fullPath } from '../functions/utils';
+#!/usr/bin/env node
+/* eslint-disable no-undef */
+const chalk = require('chalk');
+const { Command } = require('commander');
+const { CommandLoader } = require('../dist');
+const { fullPath } = require('../dist/functions/utils');
 require('dotenv').config();
 
 (async () => {
@@ -25,12 +27,12 @@ require('dotenv').config();
 	//	Getting values
 
 
-	const token: string = options.token ?? process.env.BOT_TOKEN;
-	const clientId: string = options.clientid ?? process.env.CLIENT_ID;
-	const guildId: string | undefined = options.guildId;
+	const token = options.token ?? process.env.BOT_TOKEN;
+	const clientId = options.clientid ?? process.env.CLIENT_ID;
+	const guildId = options.guildId;
 
-	const recursive: boolean = options.recursive;
-	const deleteCommands: boolean = options.delete;
+	const recursive = options.recursive;
+	const deleteCommands = options.delete;
 
 	const [ dir ] = program.processedArgs;
 
@@ -80,23 +82,23 @@ require('dotenv').config();
 	//	Util functions
 
 
-	function exit(msg?: string): void {
+	function exit(msg) {
 		if(msg) program.addHelpText('afterAll', msg);
 		program.help();
 	}
 
 
-	function info(msg: string) {
+	function info(msg) {
 		console.log(chalk.green('⇒ '), msg);
 	}
 
 
-	function warn(msg: string) {
+	function warn(msg) {
 		console.log(chalk.yellow('⇒ '), msg);
 	}
 
 
-	function error(msg: string) {
+	function error(msg) {
 		console.log(chalk.red('⇒ '), msg);
 	}
 
