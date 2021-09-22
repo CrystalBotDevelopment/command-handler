@@ -1,6 +1,6 @@
 {
   "name": "@crystaldevelopment/command-handler",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "The Command Handler for Crystal Development Bots",
   "main": "dist",
   "repository": "https://github.com/CrystalBotDevelopment/command-handler.git",
@@ -21,7 +21,6 @@
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "discord.js": "^13.1.0",
-    "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "ts-node": "10.1.0",
     "typedoc": "^0.22.3",
@@ -32,6 +31,7 @@
     "chalk": "^4.1.2",
     "commander": "^8.2.0",
     "discord-api-types": "^0.23.1",
+    "dotenv": "^10.0.0",
     "madge": "^5.0.1"
   },
   "peerDependencies": {
