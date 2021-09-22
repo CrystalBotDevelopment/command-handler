@@ -1,0 +1,40 @@
+{
+  "name": "@crystaldevelopment/command-handler",
+  "version": "1.0.0",
+  "description": "The Command Handler for Crystal Development Bots",
+  "main": "dist",
+  "repository": "https://github.com/CrystalBotDevelopment/command-handler.git",
+  "author": "JeroenoBoy <Jeroen@vandegeest.eu>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "bash scripts/build.bash",
+    "test": "yarn lint && yarn build",
+    "docs": "yarn typedoc src",
+    "cli": "yarn ts-node src/bin"
+  },
+  "bin": {
+    "cmdhandler": "dist/bin"
+  },
+  "devDependencies": {
+    "@types/node": "^16.9.2",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "ts-node": "10.1.0",
+    "typedoc": "^0.22.3",
+    "typescript": "4.3.5"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "chalk": "^4.1.2",
+    "commander": "^8.2.0",
+    "discord-api-types": "^0.23.1",
+    "madge": "^5.0.1"
+  },
+  "peerDependencies": {
+    "discord.js": "^13.1.0"
+  }
+}
