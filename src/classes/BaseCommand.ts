@@ -65,8 +65,16 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 	 * @returns ApplicationCommandData
 	 */
 	public toJSON(): ApplicationCommand {
-		const { name, description, options, defaultPermission = true } = this;
-		return { name, description, default_permission: defaultPermission, options: this.mapOptions(options) };
+		const json: ApplicationCommand = {
+			name:               this.name,
+			description:        this.description,
+			default_permission: this.defaultPermission
+		};
+
+		const options = this.mapOptions(this.options);
+		if (options) json.options = options;
+
+		return json;
 	}
 
 	/**
@@ -77,11 +85,14 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 	 */
 	public mapOptions(options: ApplicationCommandOptionData[] | undefined, defined = true): APIApplicationCommandOption[] | undefined {
 		//	@ts-ignore
-		return options?.map(({type, name, description, required, choices, options}) => ({
-			type, name, description,
-			required: required ?? undefined,
-			choices: choices ?? undefined,
-			options: this.mapOptions(options, false),
-		})) ?? (defined ? [] : undefined);
+		return options?.map(({ type, name, description, required, choices, options }) => {
+			const option: any = { type, name, description };
+
+			if (required) option.required = true;
+			if (choices)  option.choices  = choices;
+			if (options)  option.options  = this.mapOptions(options, false);
+
+			return option;
+		}) ?? (defined ? [] : undefined);
 	}
 }
