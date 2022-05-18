@@ -56,7 +56,7 @@ export const defaultCommandHandlerOptions: CommandHandlerOptions = {
 	guildId: undefined,
 	handleError: async (err, interaction) => {
 		console.log(err);
-		if(interaction.replied) await interaction.editReply('An error happened while executing this command!'+'\n```\n'+err.message+'\n```');
+		if(interaction.replied || interaction.deferred) await interaction.editReply('An error happened while executing this command!'+'\n```\n'+err.message+'\n```');
 		else await interaction.reply('An error happened while executing this command!'+'\n```\n'+err.message+'\n```');
 	}
 };
