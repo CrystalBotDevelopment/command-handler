@@ -88,9 +88,9 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 		return options?.map(({ type, name, description, required, choices, options }) => {
 			const option: any = { type, name, description, autocomplete };
 
-			if (required) option.required         = true;
-			if (choices)  option.choices          = choices;
-			if (options)  option.options          = this.mapOptions(options, false);
+			if (required)     option.required     = true;
+			if (choices)      option.choices      = choices;
+			if (options)      option.options      = this.mapOptions(options, false);
 			if (autocomplete) option.autocomplete = true;
 
 			return option;
