@@ -1,6 +1,6 @@
 {
   "name": "@crystaldevelopment/command-handler",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "The Command Handler for Crystal Development Bots",
   "main": "dist",
   "repository": "https://github.com/CrystalBotDevelopment/command-handler.git",
