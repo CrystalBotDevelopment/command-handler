@@ -11,7 +11,8 @@ export abstract class Subcommand<T extends Client = Client> extends BaseCommand<
 	public abstract options?: ApplicationCommandOptionData[];
 
 	public constructor(command: Command<T>) {
-		super(command.client);
+		super();
+		this.client  = command.client;
 		this.command = command;
 	}
 

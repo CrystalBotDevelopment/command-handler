@@ -176,6 +176,7 @@ export class CommandHandler<T extends Client<true> = Client<true>> extends BaseC
 	protected _startCommand(constructor: Constructor<Command<Client<boolean>>>): Command<Client<boolean>> {
 		//	@ts-ignore
 		const c = new constructor();
+		c.client = this.client;
 		c.onStart();
 		return c as Command;
 	}

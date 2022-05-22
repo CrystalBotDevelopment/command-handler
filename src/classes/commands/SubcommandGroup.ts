@@ -8,7 +8,8 @@ export abstract class SubcommandGroup<T extends Client = Client> extends Command
 	public readonly command: Command<T>;
 
 	public constructor(command: Command<T>) {
-		super(command.client);
+		super();
+		this.client  = command.client;
 		this.command = command;
 	}
 

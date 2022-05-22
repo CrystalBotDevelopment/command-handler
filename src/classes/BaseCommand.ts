@@ -3,7 +3,7 @@ import { ApplicationCommandOptionData, Client, CommandInteraction } from 'discor
 import { ApplicationCommand } from '../types';
 
 export abstract class BaseCommand<T extends Client = Client> implements APIApplicationCommand {
-	public readonly client: T;
+	public client: T;
 
 	// private commands: Collection<string, Subcommand>;
 	public data: APIApplicationCommand;
@@ -14,15 +14,6 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 	public abstract readonly description: string; // @ts-ignore
 	public abstract options?: ApplicationCommandOptionData[];
 	public defaultPermission = true;
-
-	/**
-	 * Create a new Command instance, this should never be called manually
-	 * @param client The target client
-	 */
-	protected constructor(client: T) {
-		this.client = client;
-	}
-
 
 	//	Events
 
