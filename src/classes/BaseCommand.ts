@@ -76,7 +76,7 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 	 */
 	public mapOptions(options: ApplicationCommandOptionData[] | undefined, defined = true): APIApplicationCommandOption[] | undefined {
 		//	@ts-ignore
-		return options?.map(({ type, name, description, required, choices, options }) => {
+		return options?.map(({ type, name, description, required, choices, options, autocomplete }) => {
 			const option: any = { type, name, description, autocomplete };
 
 			if (required)     option.required     = true;
