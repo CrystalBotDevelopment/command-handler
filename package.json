@@ -9,7 +9,8 @@
   "private": false,
   "scripts": {
     "build": "bash scripts/build.bash",
-    "test": "yarn lint && yarn build",
+    "test": "jest",
+    "publish": "yarn test && yarn run build && yarn run publish:npm",
     "docs": "yarn typedoc src",
     "cli": "yarn ts-node src/bin"
   },
@@ -17,14 +18,17 @@
     "cmdhandler": "./bin/index.js"
   },
   "devDependencies": {
+    "@types/jest": "^27.5.1",
     "@types/node": "^16.9.2",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "discord.js": "^13.1.0",
     "eslint": "^7.32.0",
+    "jest": "^28.1.0",
+    "ts-jest": "^28.0.3",
     "ts-node": "10.1.0",
     "typedoc": "^0.22.3",
-    "typescript": "4.3.5"
+    "typescript": "^4.7.2"
   },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
