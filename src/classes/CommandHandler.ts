@@ -126,6 +126,9 @@ export class CommandHandler<T extends Client<true> = Client<true>> extends BaseC
 
 		for(const command of this.commands) {
 			let applicationCommand = applicationCommands.get(command.name.toLowerCase());
+
+			console.log(applicationCommand, command.toJSON());
+
 			applicationCommands.delete(applicationCommand?.name ?? '');
 
 			const rawCmd = command.toJSON();

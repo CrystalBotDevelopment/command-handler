@@ -10,7 +10,10 @@
   "scripts": {
     "build": "bash scripts/build.bash",
     "test": "jest",
-    "publish": "yarn test && yarn run build && yarn run publish:npm",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint",
+    "publish": "lint && yarn test && yarn run build && yarn run publish:npm",
     "docs": "yarn typedoc src",
     "cli": "yarn ts-node src/bin"
   },
@@ -23,12 +26,12 @@
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "discord.js": "^13.1.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.16.0",
     "jest": "^28.1.0",
     "ts-jest": "^28.0.3",
     "ts-node": "10.1.0",
     "typedoc": "^0.22.3",
-    "typescript": "^4.7.2"
+    "typescript": "4.3.5"
   },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",

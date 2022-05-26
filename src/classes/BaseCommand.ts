@@ -62,8 +62,8 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 			default_permission: this.defaultPermission
 		};
 
-		const options = this.mapOptions(this.options);
-		if (options) json.options = options;
+		const options = this.mapOptions(this.options, false);
+		if (options && options.length > 0) json.options = options;
 
 		return json;
 	}

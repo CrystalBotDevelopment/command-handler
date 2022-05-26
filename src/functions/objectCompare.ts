@@ -18,11 +18,9 @@ export function objectCompare(a: Object | Array<any>, b: Object | Array<any>): b
 		if (typeof objA == 'object' && typeof objB == 'object') {
 			if(!objectCompare(objA, objB)) return false;
 		}
-		else {
-			if(!compare(objA,objB)) return false;
-			if(!compare(objB,objA)) return false;
-		}
+		else if (!compare(objA, objB)) return false;
 	}
+
 	return true;
 }
 
@@ -35,11 +33,14 @@ export function objectCompare(a: Object | Array<any>, b: Object | Array<any>): b
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function compare(a: any, b: any): boolean {
-	if(typeof a == typeof b) {
+	if(typeof a == typeof b)
 		return a == b;
-	}
-	if(typeof a == 'undefined' && typeof b == 'object') {
+
+	if(typeof a == 'undefined' && typeof b == 'object')
 		return Object.keys(b).length == 0;
-	}
-	return true;
+
+	if(typeof a == 'object' && typeof b == 'undefined')
+		return Object.keys(a).length == 0;
+
+	return false;
 }
