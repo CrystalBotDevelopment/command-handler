@@ -1,5 +1,5 @@
 import { REST } from '@discordjs/rest';
-import { APIApplicationCommand, Routes, Snowflake } from 'discord-api-types/v9';
+import { APIApplicationCommand, Routes, Snowflake } from 'discord-api-types/v10';
 import { Collection } from 'discord.js';
 import { EventEmitter } from 'events';
 import { directoryScanner } from '../functions/directoryScanner';
@@ -26,7 +26,7 @@ export abstract class BaseCommandHandler extends EventEmitter {
 
 	public clientId: Snowflake;
 	public guildId?: Snowflake;
-	private readonly b_restAPI = new REST({ version: '9' });
+	private readonly b_restAPI = new REST({ version: '10' });
 
 	public readonly commands = new Array<Command>();
 

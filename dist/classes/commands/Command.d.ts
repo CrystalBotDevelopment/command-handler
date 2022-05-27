@@ -1,6 +1,6 @@
 import { Client, CommandInteraction, ApplicationCommandOptionData, Collection } from 'discord.js';
 import { BaseCommand } from '../BaseCommand';
-import { APIApplicationCommand } from 'discord-api-types';
+import { APIApplicationCommand } from 'discord-api-types/v10';
 export declare abstract class Command<T extends Client = Client> extends BaseCommand<T> {
     private readonly extension;
     abstract options: ApplicationCommandOptionData[];

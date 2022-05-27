@@ -1,5 +1,5 @@
 
-import { ApplicationCommandOptionType } from 'discord-api-types';
+import { ApplicationCommandOptionType } from 'discord-api-types/v10';
 import { ApplicationCommandOptionData, CommandInteraction } from 'discord.js';
 import { Subcommand } from '../../../../src/classes/commands/Subcommand';
 

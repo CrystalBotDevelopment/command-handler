@@ -1,14 +1,22 @@
 import { Client, CommandInteraction, ApplicationCommandOptionData, Collection } from 'discord.js';
 import { directoryScanner } from '../../functions/directoryScanner';
 import { BaseCommand } from '../BaseCommand';
-import { APIApplicationCommand } from 'discord-api-types';
+import { APIApplicationCommand, ApplicationCommandType } from 'discord-api-types/v10';
 
 
 export abstract class Command<T extends Client = Client> extends BaseCommand<T> {
 	private readonly extension = 'subcommand';
 
+	//	Permissions
+	public defaultMemberPermisions: string | null = null;
+
 	public abstract options: ApplicationCommandOptionData[];
+	public type: ApplicationCommandType = ApplicationCommandType.ChatInput;
+
+	//	Data
 	public subcommands = new Collection<string, BaseCommand>();
+
+
 
 	/**
 	 * Load a new Subcommand or SubcommandGroup to this command
@@ -19,6 +27,7 @@ export abstract class Command<T extends Client = Client> extends BaseCommand<T> 
 		this.options.push(command.toJSON() as any);
 		this.subcommands.set(command.name, command);
 	}
+
 
 	/**
 	 * Load a Subcommands or SubcommandGroups from a path;
@@ -36,6 +45,7 @@ export abstract class Command<T extends Client = Client> extends BaseCommand<T> 
 		this.loadSubcommand(command);
 	}
 
+
 	/**
 	 * Load Subcommands or SubcommandGroups from a directory
 	 * @param dir The directory to search
@@ -48,6 +58,7 @@ export abstract class Command<T extends Client = Client> extends BaseCommand<T> 
 			this.loadSubcommandFromPath(file);
 		}
 	}
+
 
 	/**
 	 * Run a specific subcommand
@@ -65,6 +76,7 @@ export abstract class Command<T extends Client = Client> extends BaseCommand<T> 
 		throw new Error('Could not find Subcommand / Subcommandgroup');
 	}
 
+
 	/**
 	 * Loads all commands and subcommands
 	 * @param command The APIApplicationCommand to load
@@ -74,6 +86,32 @@ export abstract class Command<T extends Client = Client> extends BaseCommand<T> 
 		this.subcommands.forEach(c=>c.load(command));
 		this.onLoad();
 	}
+
+
+	/**
+	 * Checking if this command is up to date
+	 * @param command The command to check with
+	 * @returns If this command is up to date
+	 */
+	public matchesAPICommand(command: APIApplicationCommand): boolean {
+		if (command.name != this.name)               return false;
+		if (command.type != this.type)               return false;
+		if (command.description != this.description) return false;
+		if (command.default_member_permissions != this.defaultMemberPermisions) return false;
+
+		if (command.guild_id) {
+			if (this.data.guild_id != command.guild_id) return false;
+		}
+		else {
+			//	TODO: Check if this is allowed in DM
+			// if (this.)
+		}
+
+		//	TODO check localised strings
+
+		return true;
+	}
+
 
 	/**
 	 * Get the current subcommand

@@ -1,4 +1,4 @@
-import { APIApplicationCommand, APIApplicationCommandOption } from 'discord-api-types/v9';
+import { APIApplicationCommand, APIApplicationCommandOption } from 'discord-api-types/v10';
 import { ApplicationCommandOptionData, Client, CommandInteraction } from 'discord.js';
 import { ApplicationCommand } from '../types';
 
@@ -13,7 +13,6 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 	public abstract readonly name: string;
 	public abstract readonly description: string; // @ts-ignore
 	public abstract options?: ApplicationCommandOptionData[];
-	public defaultPermission = true;
 
 	//	Events
 
@@ -58,8 +57,7 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 	public toJSON(): ApplicationCommand {
 		const json: ApplicationCommand = {
 			name:               this.name,
-			description:        this.description,
-			default_permission: this.defaultPermission
+			description:        this.description
 		};
 
 		const options = this.mapOptions(this.options, false);

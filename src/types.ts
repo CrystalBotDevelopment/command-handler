@@ -1,4 +1,4 @@
-import { APIApplicationCommandOption } from 'discord-api-types/v9';
+import { APIApplicationCommandOption } from 'discord-api-types/v10';
 
 export type InversePartial<T> = { [P in keyof T]-?: T[P]; }
 export type Constructor<T = any> = Function & { prototype: T }
