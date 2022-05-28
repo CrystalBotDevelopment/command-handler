@@ -1,10 +1,10 @@
 import { APIApplicationCommand } from 'discord-api-types/v10';
 
-type key = 'test-match' | 'test-match-guild' | 'test-unmatch' | 'test-unmatch-guild';
+type key = 'test' | 'test-guild';
 
 
 const obj: { [key: string]: APIApplicationCommand } = {
-	'test-match': {
+	'test': {
 		id: '0',
 		application_id: '0',
 		version: '0',
@@ -14,18 +14,12 @@ const obj: { [key: string]: APIApplicationCommand } = {
 		description: 'Test command',
 		options: []
 	},
-	get "test-match-guild"()   { return {...this["test-match"],   guild_id: '0'}; },
+	get "test-guild"()   { return {...this["test"],   guild_id: '0'}; },
 }
 
 Object.freeze(obj);
 
 
-
-export function apiCommandData(command: key): APIApplicationCommand {
-	return obj[command];
-}
-
-
-export function editCommand(command: key, edited: Partial<APIApplicationCommand>): APIApplicationCommand {
-	return {...apiCommandData(command), ...edited};
+export function apiCommandData(command: key, edited?: Partial<APIApplicationCommand>): APIApplicationCommand {
+	return {...obj[command], ...edited};
 }

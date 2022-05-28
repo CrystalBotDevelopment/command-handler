@@ -1,8 +1,8 @@
-import { ApplicationCommandOptionData } from 'discord.js';
-import { Command, CommandError } from '../../..';
+import { APIApplicationCommandOption } from 'discord-api-types/v10';
+import { Command, CommandError } from '../../../src';
 
 export default class TestCommand extends Command {
-	public options: ApplicationCommandOptionData[] = [];
+	public options: APIApplicationCommandOption[] = [];
 
 	public name = 'test';
 	public description = 'Test command';

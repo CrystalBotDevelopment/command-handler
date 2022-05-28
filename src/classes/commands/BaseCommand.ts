@@ -1,8 +1,8 @@
 import { APIApplicationCommand, APIApplicationCommandOption } from 'discord-api-types/v10';
-import { ApplicationCommandOptionData, Client, CommandInteraction } from 'discord.js';
-import { ApplicationCommand } from '../types';
+import { Client, CommandInteraction } from 'discord.js';
+import { ApplicationCommand } from '../../types';
 
-export abstract class BaseCommand<T extends Client = Client> implements APIApplicationCommand {
+export abstract class BaseCommand<T extends Client = Client> {
 	public client: T;
 
 	// private commands: Collection<string, Subcommand>;
@@ -12,7 +12,7 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 
 	public abstract readonly name: string;
 	public abstract readonly description: string; // @ts-ignore
-	public abstract options?: ApplicationCommandOptionData[];
+	public abstract options?: APIApplicationCommandOption[];
 
 	//	Events
 
@@ -72,7 +72,7 @@ export abstract class BaseCommand<T extends Client = Client> implements APIAppli
 	 * @param defined If the options should be defined or not
 	 * @returns The mapped options
 	 */
-	public mapOptions(options: ApplicationCommandOptionData[] | undefined, defined = true): APIApplicationCommandOption[] | undefined {
+	public mapOptions(options: APIApplicationCommandOption[] | undefined, defined = true): APIApplicationCommandOption[] | undefined {
 		//	@ts-ignore
 		return options?.map(({ type, name, description, required, choices, options, autocomplete }) => {
 			const option: any = { type, name, description, autocomplete };

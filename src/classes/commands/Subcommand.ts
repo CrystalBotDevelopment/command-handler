@@ -1,6 +1,6 @@
-import { ApplicationCommandOptionType } from 'discord-api-types/v9';
-import { Client, ApplicationCommandOptionData } from 'discord.js';
-import { BaseCommand } from '../BaseCommand';
+import { APIApplicationCommandOption, ApplicationCommandOptionType } from 'discord-api-types/v10';
+import { Client } from 'discord.js';
+import { BaseCommand } from './BaseCommand';
 import { Command } from './Command';
 
 
@@ -8,7 +8,7 @@ export abstract class Subcommand<T extends Client = Client> extends BaseCommand<
 	public readonly type = ApplicationCommandOptionType.Subcommand;
 
 	public readonly command: Command<T>; //	@ts-ignore
-	public abstract options?: ApplicationCommandOptionData[];
+	public abstract options?: APIApplicationCommandOption[];
 
 	public constructor(command: Command<T>) {
 		super();
@@ -21,7 +21,7 @@ export abstract class Subcommand<T extends Client = Client> extends BaseCommand<
 	 * @returns the option it returned
 	 */
 	//	@ts-ignore
-	public toJSON(): ApplicationCommandOptionData {
+	public toJSON(): APIApplicationCommandOption {
 		const { type, name, description, options } = this;
 		return { type: type as number, name, description, options: this.mapOptions(options) as any[] };
 	}

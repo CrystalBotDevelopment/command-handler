@@ -62,6 +62,16 @@ export abstract class BaseCommandHandler extends EventEmitter {
 	}
 
 	/**
+	 * Adds a constructor to the command handler
+	 * @returns Self
+	 */
+	public addConstructor<T extends Command>(command: Constructor<T>): T {
+		const cmd = this._startCommand(command);
+		this.commands.push(cmd);
+		return cmd as T;
+	}
+
+	/**
 	 * Retrieves the commands from the API
 	 * @returns The found commands
 	 */
