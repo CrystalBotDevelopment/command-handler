@@ -1,6 +1,7 @@
 import { Client } from 'discord.js';
 import { APIApplicationCommand, APIApplicationCommandOption, ApplicationCommandType } from 'discord-api-types/v10';
 import { CommandWithLoader } from './CommandWithLoader';
+import { matchOptions } from '../../functions/matchOptions';
 
 
 export abstract class Command<T extends Client = Client> extends CommandWithLoader<T> {
@@ -29,35 +30,12 @@ export abstract class Command<T extends Client = Client> extends CommandWithLoad
 		}
 		else {
 			//	TODO: Check if this is allowed in DM
-			// if (this.)
 		}
 
 		//	TODO check localised strings
 
-		if (command.options && !this._optionsMatch(command.options)) return false;
+		if (command.options && !matchOptions(command.options, this.options)) return false;
 
 		return true;
-	}
-
-
-	private _optionsMatch(options: APIApplicationCommandOption[]): boolean {
-		for(const option of options) {
-			const myOption = this.options.find(o=>o.name == option.name);
-			console.log(option, myOption);
-			if(!myOption) return false;
-
-			
-			if (option.type != myOption.type) return false;
-			if (option.name != myOption.name) return false;
-			if (option.description != myOption.description) return false;
-
-			//	TODO: Check choices
-
-			//	TODO: check localized
-
-			//	TODO: Check options
-		}
-
-		return true
 	}
 }

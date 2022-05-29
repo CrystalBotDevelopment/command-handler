@@ -1,4 +1,4 @@
-import { APIApplicationCommand } from 'discord-api-types/v10';
+import { APIApplicationCommand, APIApplicationCommandOption } from 'discord-api-types/v10';
 import { Client, Collection, CommandInteraction } from 'discord.js';
 import { directoryScanner } from '../../functions/directoryScanner';
 import { BaseCommand } from './BaseCommand';
@@ -10,6 +10,7 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 
 	//	Data
 	public subcommands = new Collection<string, BaseCommand>();
+	public abstract options?: APIApplicationCommandOption[];
 
 	
 	/**

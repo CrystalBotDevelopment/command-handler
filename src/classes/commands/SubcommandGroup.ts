@@ -1,16 +1,19 @@
-import { ApplicationCommandOptionType } from 'discord-api-types/v10';
+import { APIApplicationCommandOption, APIApplicationCommandSubcommandGroupOption, ApplicationCommandOptionType } from 'discord-api-types/v10';
 import { Client, ApplicationCommandOptionData } from 'discord.js';
 import { Command } from './Command';
 import { CommandWithLoader } from './CommandWithLoader';
 
 
-export abstract class SubcommandGroup<T extends Client = Client> extends CommandWithLoader<T> {
+export abstract class SubcommandGroup<T extends Client = Client> extends CommandWithLoader<T> implements APIApplicationCommandSubcommandGroupOption {
 	protected extension = 'subcommand';
 
 	public readonly type = ApplicationCommandOptionType.SubcommandGroup;
 	public readonly command: Command<T>;
 
 	public autocomplete: boolean | undefined = undefined;
+
+	//	@ts-ignore
+	public readonly options: APIApplicationCommandOption[] = [];
 
 	
 	public constructor(command: Command<T>) {
