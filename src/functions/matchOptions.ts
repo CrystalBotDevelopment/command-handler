@@ -1,5 +1,5 @@
-import { APIApplicationCommandOption } from 'discord-api-types/v10';
-import { isStringOption, isSubcommandGroupOption, isSubcommandOption } from './typeguards/options';
+import { APIApplicationCommandBasicOption, APIApplicationCommandOption } from 'discord-api-types/v10';
+import { hasChoices, isAttatchmentOption, isBooleanOption, isChannelOption, isIntegerOption, isMentionableOption, isNumberOption, isRoleOption, isStringOption, isSubcommandGroupOption, isSubcommandOption, isUserOption } from './typeguards/options';
 
 
 /**
@@ -29,20 +29,39 @@ export function matchOptions(options: APIApplicationCommandOption[], myOptions: 
 			if (!matchOptions(option.options!, myOption.options!)) return false;
 		}
 
-		if (isSubcommandGroupOption(option) && isSubcommandGroupOption(myOption)) {
+		else if (isSubcommandGroupOption(option) && isSubcommandGroupOption(myOption)) {
 			if (!option.options) {
 				if (myOption.options && myOption.options.length > 0) return false;
 			}
 			else if (myOption.options && !matchOptions(option.options!, myOption.options!)) return false;
 		}
 
-		//	Checking primitive types
+		//	Checking primitive types (Excludes some that don't need checking)
 
-		if (isStringOption(option) && isStringOption(myOption)) {
+		else if (isStringOption(option) && isStringOption(myOption)) {
 			if (comparePrimitiveUndefined(option.autocomplete, myOption.autocomplete)) return false;
+			if (!matchChoices(option, myOption)) return false;
 		}
 
-		//	TODO: Check options
+		else if (isIntegerOption(option) && isIntegerOption(myOption)) {
+			if (comparePrimitiveUndefined(option.autocomplete, myOption.autocomplete)) return false;
+			if (comparePrimitiveUndefined(option.min_value, myOption.min_value)) return false;
+			if (comparePrimitiveUndefined(option.min_value, myOption.max_value)) return false;
+			if (!matchChoices(option, myOption)) return false;
+		}
+		
+		else if (isNumberOption(option) && isNumberOption(myOption)) {
+			if (comparePrimitiveUndefined(option.autocomplete, myOption.autocomplete)) return false;
+			if (comparePrimitiveUndefined(option.min_value, myOption.min_value)) return false;
+			if (comparePrimitiveUndefined(option.min_value, myOption.max_value)) return false;
+			if (!matchChoices(option, myOption)) return false;
+		}
+
+		//	Checking discord types (Excludes some that don't need checking)
+
+		else if (isChannelOption(option) && isChannelOption(myOption)) {
+			if (comparePrimitiveUndefined(option.channel_types, myOption.channel_types)) return false;
+		}
 	}
 
 	return true
@@ -52,7 +71,20 @@ export function matchOptions(options: APIApplicationCommandOption[], myOptions: 
 /**
  * Compares if the choices match 
  */
-export function matchChoices<T>(a: T[], b: T[]): boolean {
+export function matchChoices(a1: APIApplicationCommandBasicOption, b1: APIApplicationCommandBasicOption): boolean {
+
+	//	Checking types
+
+	const aHasChoices = hasChoices(a1);
+	const bHasChoices = hasChoices(b1);
+
+	if (!(aHasChoices && bHasChoices)) return false;
+
+	const a = a1.choices;
+	const b = b1.choices;
+
+	//	Checking choices
+
 	if (a.length != b.length) return false;
 
 	for(const choice of a) {

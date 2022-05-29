@@ -1,4 +1,4 @@
-import { APIApplicationCommandAttachmentOption, APIApplicationCommandBooleanOption, APIApplicationCommandChannelOption, APIApplicationCommandIntegerOption, APIApplicationCommandMentionableOption, APIApplicationCommandNumberOption, APIApplicationCommandOption, APIApplicationCommandRoleOption, APIApplicationCommandStringOption, APIApplicationCommandSubcommandGroupOption, APIApplicationCommandSubcommandOption, APIApplicationCommandUserOption } from 'discord-api-types/v10';
+import { APIApplicationCommandAttachmentOption, APIApplicationCommandBasicOption, APIApplicationCommandBooleanOption, APIApplicationCommandChannelOption, APIApplicationCommandIntegerOption, APIApplicationCommandMentionableOption, APIApplicationCommandNumberOption, APIApplicationCommandOption, APIApplicationCommandRoleOption, APIApplicationCommandStringOption, APIApplicationCommandSubcommandGroupOption, APIApplicationCommandSubcommandOption, APIApplicationCommandUserOption } from 'discord-api-types/v10';
 
 //	Commands
 
@@ -48,4 +48,10 @@ export function isMentionableOption(option: APIApplicationCommandOption) : optio
 
 export function isAttatchmentOption(option: APIApplicationCommandOption) : option is APIApplicationCommandAttachmentOption {
 	return option.type === 11;
+}
+
+//	Checking for choices
+
+export function hasChoices(option: APIApplicationCommandBasicOption) : option is APIApplicationCommandBasicOption & { choices: string[] } {
+	return Object.hasOwn(option, 'choices');
 }
