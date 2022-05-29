@@ -6,7 +6,7 @@ export default class TestSubCMD extends Subcommand {
 	
 	public options?: APIApplicationCommandOption[] | undefined;
 	public name = 'test';
-	public description = 'just some test command';
+	public description = 'Test';
 	
 	public onStart(): void { }
 	public onLoad(): void {	}

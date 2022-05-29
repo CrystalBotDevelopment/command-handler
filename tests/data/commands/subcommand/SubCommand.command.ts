@@ -1,12 +1,12 @@
 import { APIApplicationCommandOption } from 'discord-api-types/v10';
 import { CommandInteraction } from 'discord.js';
-import { Command, CommandError } from '../../../../src';
+import { Command } from '../../../../src';
 
 export default class SubCommand extends Command {
 	public options: APIApplicationCommandOption[] = [];
 
-	public name = 'test';
-	public description = 'Test command';
+	public name = 'subcmd';
+	public description = 'just some test command';
 
 
 	public onStart(): void {

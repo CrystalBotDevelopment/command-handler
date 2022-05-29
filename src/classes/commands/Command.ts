@@ -45,12 +45,9 @@ export abstract class Command<T extends Client = Client> extends CommandWithLoad
 			const myOption = options.find(o=>o.name == option.name);
 			if(!myOption) return false;
 			
-			
-			
 			if (option.type != myOption.type) return false;
 			if (option.name != myOption.name) return false;
 			if (option.description != myOption.description) return false;
-			if (option.required != myOption.required) return false;
 
 			//	TODO: Check choices
 

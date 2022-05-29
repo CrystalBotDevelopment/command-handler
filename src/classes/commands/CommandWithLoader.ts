@@ -2,6 +2,7 @@ import { APIApplicationCommand } from 'discord-api-types/v10';
 import { Client, Collection, CommandInteraction } from 'discord.js';
 import { directoryScanner } from '../../functions/directoryScanner';
 import { BaseCommand } from './BaseCommand';
+import { Command } from './Command';
 
 export abstract class CommandWithLoader<T extends Client = Client> extends BaseCommand<T> {
 	protected abstract extension: string;
@@ -10,7 +11,7 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 	//	Data
 	public subcommands = new Collection<string, BaseCommand>();
 
-
+	
 	/**
 	 * Load a new Subcommand or SubcommandGroup to this command
 	 * @param subcommand the subcommand to load
@@ -28,7 +29,7 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 	 */
 	public loadSubcommandFromPath(path: string): void {
 		//	@ts-ignore
-		const cmd = this.command ?? this;
+		const cmd = this instanceof Command ? this : this.command;
 
 		let _a;
 		const Constructor = (_a = require(path)).default ?? _a;

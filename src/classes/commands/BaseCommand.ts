@@ -25,6 +25,7 @@ export abstract class BaseCommand<T extends Client = Client> {
 	 */
 	public abstract onStart(): void
 
+
 	/**
 	 * Load the command
 	 * @param command The command to load
@@ -34,11 +35,13 @@ export abstract class BaseCommand<T extends Client = Client> {
 		this.onLoad();
 	}
 
+
 	/**
 	 * Gets called when the class loads.
 	 * When this loads, the ApplicationCommand object will be delivered with it.
 	 */
 	public abstract onLoad(): void
+
 
 	/**
 	 * Runs this command
@@ -66,6 +69,7 @@ export abstract class BaseCommand<T extends Client = Client> {
 		return json;
 	}
 
+	
 	/**
 	 * Maps the command options so they match the discord API closer
 	 * @param options The options to match

@@ -5,7 +5,7 @@ import { Subcommand } from '../../../../../src';
 export default class B extends Subcommand {
 	public options?: APIApplicationCommandOption[] | undefined;
 
-	public name = 'B';
+	public name = 'b';
 	public description = 'B subcommand';
 	
 	public onStart(): void {}

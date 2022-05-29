@@ -10,6 +10,9 @@ export abstract class SubcommandGroup<T extends Client = Client> extends Command
 	public readonly type = ApplicationCommandOptionType.SubcommandGroup;
 	public readonly command: Command<T>;
 
+	public autocomplete: boolean | undefined = undefined;
+
+	
 	public constructor(command: Command<T>) {
 		super();
 		this.client  = command.client;

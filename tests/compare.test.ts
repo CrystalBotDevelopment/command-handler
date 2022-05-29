@@ -1,8 +1,7 @@
-import { APIApplicationCommand } from 'discord-api-types/v10';
 import { Command, CommandLoader } from '../src';
 import { Constructor } from '../src/types';
 //	@ts-ignore
-import { apiCommandData, editApiCommandData } from './data/apiCommands'
+import { apiCommandData, editApiCommandData, queryApiCommand } from './data/apiCommands'
 
 describe('Comparing commands to API commands', () => {
 
@@ -15,13 +14,26 @@ describe('Comparing commands to API commands', () => {
 	});
 
 
+	const testCMD = require('./data/commands/test.command.ts').default as Constructor<Command>;
+	const subCMD  = require('./data/commands/subcommand/SubCommand.command').default as Constructor<Command>;
+
+
 	test.each([
-		[apiCommandData('test'), require('./data/commands/test.command.ts').default, true],
-		[apiCommandData('test', { name: 'a' }), require('./data/commands/test.command.ts').default, false],
-		[apiCommandData('test', { description: 'a' }), require('./data/commands/test.command.ts').default, false],
-		[apiCommandData('test', { type: 2 }), require('./data/commands/test.command.ts').default, false],
-	])('Comparing simple command #%#', (api: APIApplicationCommand, cmd: Constructor<Command>, check) => {
+		[true,  testCMD, apiCommandData('test')],
+		[false, testCMD, apiCommandData('test', { name: 'a' })],
+		[false, testCMD, apiCommandData('test', { description: 'a' })],
+		[false, testCMD, apiCommandData('test', { type: 2 })],
+	])('Comparing simple command #%#', (check, cmd, api) => {
 		const command = loader.addConstructor(cmd);
 		expect(command.matchesAPICommand(api)).toBe(check);
 	})
+
+
+	test.each([
+		[true,  subCMD, apiCommandData('subcmd')],
+		[false, subCMD, queryApiCommand('subcmd', {options:{0:{$set:{name:'test'}}}})]
+	])('Comparing with subcommands #%#', (check, cmd, api) => {
+		const command = loader.addConstructor(cmd);
+		expect(command.matchesAPICommand(api)).toBe(check);
+	});
 })
