@@ -42,8 +42,10 @@ export abstract class Command<T extends Client = Client> extends CommandWithLoad
 
 	private _optionsMatch(options: APIApplicationCommandOption[]): boolean {
 		for(const option of options) {
-			const myOption = options.find(o=>o.name == option.name);
+			const myOption = this.options.find(o=>o.name == option.name);
+			console.log(option, myOption);
 			if(!myOption) return false;
+
 			
 			if (option.type != myOption.type) return false;
 			if (option.name != myOption.name) return false;
@@ -52,6 +54,8 @@ export abstract class Command<T extends Client = Client> extends CommandWithLoad
 			//	TODO: Check choices
 
 			//	TODO: check localized
+
+			//	TODO: Check options
 		}
 
 		return true

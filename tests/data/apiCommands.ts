@@ -35,7 +35,7 @@ const obj: { [key: string]: APIApplicationCommand } = {
 					{ type: 1, name: 'c', description: 'C subcommand' },
 				]
 			},
-			{ type: 1, name: 'test', description: 'test' },
+			{ type: 1, name: 'test', description: 'Test' },
 		]
 	}
 }

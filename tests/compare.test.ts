@@ -31,7 +31,10 @@ describe('Comparing commands to API commands', () => {
 
 	test.each([
 		[true,  subCMD, apiCommandData('subcmd')],
-		[false, subCMD, queryApiCommand('subcmd', {options:{0:{$set:{name:'test'}}}})]
+		[false, subCMD, queryApiCommand('subcmd', {options:{0:{$set:{name:'test'}}}})],
+		[false, subCMD, queryApiCommand('subcmd', {options:{0:{$set:{type:1}}}})],
+		[false, subCMD, queryApiCommand('subcmd', {options:{0:{options:{0:{$set:{name:'test'}}}}}})],
+		[false, subCMD, queryApiCommand('subcmd', {options:{0:{$set:{description:'test'}}}})]
 	])('Comparing with subcommands #%#', (check, cmd, api) => {
 		const command = loader.addConstructor(cmd);
 		expect(command.matchesAPICommand(api)).toBe(check);
