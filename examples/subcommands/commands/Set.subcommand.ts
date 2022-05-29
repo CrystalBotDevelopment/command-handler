@@ -1,5 +1,5 @@
 
-import { ApplicationCommandOptionData, CommandInteraction } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import { join } from 'path';
 import { SubcommandGroup } from '../../../src/classes/commands/SubcommandGroup';
 
@@ -7,7 +7,7 @@ export default class extends SubcommandGroup {
 
 	public name = 'set';
 	public description = 'Set some settings';
-	public options: ApplicationCommandOptionData[] = [];
+	public options = [];
 
 	public onStart(): void {
 		this.loadSubcommandsFromDir(join(__dirname, 'settings'));
@@ -18,7 +18,6 @@ export default class extends SubcommandGroup {
 	}
 
 	public async run(interaction: CommandInteraction): Promise<any | void> {
-		console.log(this.subcommands);
 		await this.runSubcommand(interaction);
 	}
 }

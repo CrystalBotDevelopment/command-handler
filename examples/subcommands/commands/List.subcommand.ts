@@ -1,12 +1,11 @@
-
-import { ApplicationCommandOptionData, CommandInteraction } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import { Subcommand } from '../../../src/classes/commands/Subcommand';
 
 export default class extends Subcommand {
-
+	
 	public name = 'list';
 	public description = 'List some settings';
-	public options: ApplicationCommandOptionData[] = [];
+	public options = [];
 
 	public onStart(): void { 1; }
 	public onLoad(): void {	console.log('Loaded subcommand list'); }
