@@ -5,7 +5,7 @@ describe('Checking if the option typeguards are working', () => {
 	const data = {
 		name: 'test',
 		description: 'test',
-	}
+	};
 
 	test('Checking Subcommand guard', () => {
 		expect(isSubcommandOption({ ...data, type: 1 })).toBe(true);
@@ -43,13 +43,13 @@ describe('Checking if the option typeguards are working', () => {
 		expect(isStringOption({ ...data, type: 3 })).toBe(true);
 		expect(isStringOption({ ...data, type: 4 })).toBe(false);
 		expect(isStringOption({ ...data, type: 5 })).toBe(false);
-		expect(isStringOption({ ...data, type: 6 })).toBe(false);	
+		expect(isStringOption({ ...data, type: 6 })).toBe(false);
 		expect(isStringOption({ ...data, type: 7 })).toBe(false);
 		expect(isStringOption({ ...data, type: 8 })).toBe(false);
 		expect(isStringOption({ ...data, type: 9 })).toBe(false);
 		expect(isStringOption({ ...data, type: 10 })).toBe(false);
 		expect(isStringOption({ ...data, type: 11 })).toBe(false);
-	})
+	});
 
 
 	test('Checking Integer guard', () => {
@@ -96,7 +96,7 @@ describe('Checking if the option typeguards are working', () => {
 		expect(isNumberOption({ ...data, type: 11 })).toBe(false);
 	});
 
-	
+
 	test('Checking User guard', () => {
 		expect(isUserOption({ ...data, type: 1 })).toBe(false);
 		expect(isUserOption({ ...data, type: 2 })).toBe(false);
@@ -171,4 +171,4 @@ describe('Checking if the option typeguards are working', () => {
 		expect(isAttatchmentOption({ ...data, type: 11 })).toBe(true);
 	});
 
-})
+});

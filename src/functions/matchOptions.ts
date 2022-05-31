@@ -1,21 +1,21 @@
 import { APIApplicationCommandBasicOption, APIApplicationCommandOption } from 'discord-api-types/v10';
-import { hasChoices, isAttatchmentOption, isBooleanOption, isChannelOption, isIntegerOption, isMentionableOption, isNumberOption, isRoleOption, isStringOption, isSubcommandGroupOption, isSubcommandOption, isUserOption } from './typeguards/options';
+import { hasChoices, isChannelOption, isIntegerOption, isNumberOption, isStringOption, isSubcommandGroupOption, isSubcommandOption } from './typeguards/options';
 
 
 /**
- * Compares the given option with the given option type. 
+ * Compares the given option with the given option type.
  */
 export function matchOptions(options: APIApplicationCommandOption[], myOptions: APIApplicationCommandOption[]): boolean {
 	if (options.length != myOptions.length) return false;
 
 	//	Comparing options
 
-	for(const option of options) {
-		const myOption = myOptions.find(o=>o.name == option.name);
-		if(!myOption) return false;
+	for (const option of options) {
+		const myOption = myOptions.find(o => o.name == option.name);
+		if (!myOption) return false;
 
 		//	Checking basic properties
-		
+
 		if (option.type != myOption.type) return false;
 		if (option.name != myOption.name) return false;
 		if (option.description != myOption.description) return false;
@@ -49,7 +49,7 @@ export function matchOptions(options: APIApplicationCommandOption[], myOptions: 
 			if (comparePrimitiveUndefined(option.min_value, myOption.max_value)) return false;
 			if (!matchChoices(option, myOption)) return false;
 		}
-		
+
 		else if (isNumberOption(option) && isNumberOption(myOption)) {
 			if (comparePrimitiveUndefined(option.autocomplete, myOption.autocomplete)) return false;
 			if (comparePrimitiveUndefined(option.min_value, myOption.min_value)) return false;
@@ -64,12 +64,12 @@ export function matchOptions(options: APIApplicationCommandOption[], myOptions: 
 		}
 	}
 
-	return true
+	return true;
 }
 
 
 /**
- * Compares if the choices match 
+ * Compares if the choices match
  */
 export function matchChoices(a1: APIApplicationCommandBasicOption, b1: APIApplicationCommandBasicOption): boolean {
 
@@ -87,7 +87,7 @@ export function matchChoices(a1: APIApplicationCommandBasicOption, b1: APIApplic
 
 	if (a.length != b.length) return false;
 
-	for(const choice of a) {
+	for (const choice of a) {
 		if (!b.includes(choice)) return false;
 	}
 

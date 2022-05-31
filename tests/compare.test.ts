@@ -1,7 +1,7 @@
 import { Command, CommandLoader } from '../src';
 import { Constructor } from '../src/types';
 //	@ts-ignore
-import { apiCommandData, editApiCommandData, queryApiCommand } from './data/apiCommands'
+import { apiCommandData, queryApiCommand } from './data/apiCommands';
 
 describe('Comparing commands to API commands', () => {
 
@@ -26,7 +26,7 @@ describe('Comparing commands to API commands', () => {
 	])('Comparing simple command #%#', (check, cmd, api) => {
 		const command = loader.addConstructor(cmd);
 		expect(command.matchesAPICommand(api)).toBe(check);
-	})
+	});
 
 
 	test.each([
@@ -39,4 +39,4 @@ describe('Comparing commands to API commands', () => {
 		const command = loader.addConstructor(cmd);
 		expect(command.matchesAPICommand(api)).toBe(check);
 	});
-})
+});

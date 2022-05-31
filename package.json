@@ -6,7 +6,6 @@
   "repository": "https://github.com/CrystalBotDevelopment/command-handler.git",
   "author": "JeroenoBoy <Jeroen@vandegeest.eu>",
   "license": "MIT",
-  "private": false,
   "scripts": {
     "build": "bash scripts/build.bash",
     "test": "jest",
@@ -22,26 +21,26 @@
   },
   "devDependencies": {
     "@types/jest": "^27.5.1",
-    "@types/node": "^16.9.2",
-    "@typescript-eslint/eslint-plugin": "^4.31.1",
-    "@typescript-eslint/parser": "^4.31.1",
-    "discord.js": "^13.1.0",
+    "@types/node": "^17.0.36",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "discord.js": "^13.7.0",
     "eslint": "^8.16.0",
     "jest": "^28.1.0",
     "ts-jest": "^28.0.3",
-    "ts-node": "10.1.0",
-    "typedoc": "^0.22.3",
-    "typescript": "4.3.5"
+    "ts-node": "^10.8.0",
+    "typedoc": "^0.22.16",
+    "typescript": "^4.7.2"
   },
   "dependencies": {
-    "@discordjs/rest": "^0.1.0-canary.0",
-    "chalk": "^4.1.2",
-    "commander": "^8.2.0",
-    "discord-api-types": "^0.33.0",
-    "dotenv": "^10.0.0",
+    "@discordjs/rest": "^0.4.1",
+    "chalk": "^5.0.1",
+    "commander": "^9.3.0",
+    "discord-api-types": "^0.33.1",
+    "dotenv": "^16.0.1",
     "madge": "^5.0.1"
   },
   "peerDependencies": {
-    "discord.js": "^13.1.0"
+    "discord.js": "^13.7.0"
   }
 }
