@@ -12,13 +12,13 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 	public subcommands = new Collection<string, BaseCommand>();
 	public abstract options?: APIApplicationCommandOption[];
 
-	
+
 	/**
 	 * Load a new Subcommand or SubcommandGroup to this command
 	 * @param subcommand the subcommand to load
 	 */
 	public loadSubcommand(command: BaseCommand): void {
-		if(!this.options) this.options = [];
+		if (!this.options) this.options = [];
 		this.options.push(command.toJSON() as any);
 		this.subcommands.set(command.name, command);
 	}
@@ -49,7 +49,7 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 	public loadSubcommandsFromDir(dir: string, recursive = false): void {
 		const files = directoryScanner(dir, recursive, this.extension);
 
-		for(const file of files) {
+		for (const file of files) {
 			this.loadSubcommandFromPath(file);
 		}
 	}
@@ -62,11 +62,11 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 	public async runSubcommand(interaction: CommandInteraction): Promise<any> {
 		const groupName = this._getSubCMD('getSubcommandGroup', interaction);
 		const group = this.subcommands.get(groupName);
-		if(group) return await group.run(interaction);
+		if (group) return await group.run(interaction);
 
 		const commandName = this._getSubCMD('getSubcommand', interaction);
 		const command = this.subcommands.get(commandName);
-		if(command) return await command.run(interaction);
+		if (command) return await command.run(interaction);
 
 		throw new Error('Could not find Subcommand / Subcommandgroup');
 	}
@@ -78,7 +78,7 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 	 */
 	public load(command: APIApplicationCommand): void {
 		this.data = command;
-		this.subcommands.forEach(c=>c.load(command));
+		this.subcommands.forEach(c => c.load(command));
 		this.onLoad();
 	}
 
@@ -91,7 +91,7 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 			return interaction.options[type]();
 		}
 		// eslint-disable-next-line no-empty
-		catch {}
+		catch { }
 		return '';
 	}
 }

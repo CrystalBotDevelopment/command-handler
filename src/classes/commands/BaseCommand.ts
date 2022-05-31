@@ -59,8 +59,8 @@ export abstract class BaseCommand<T extends Client = Client> {
 	 */
 	public toJSON(): ApplicationCommand {
 		const json: ApplicationCommand = {
-			name:               this.name,
-			description:        this.description
+			name: this.name,
+			description: this.description
 		};
 
 		const options = this.mapOptions(this.options, false);
@@ -69,7 +69,7 @@ export abstract class BaseCommand<T extends Client = Client> {
 		return json;
 	}
 
-	
+
 	/**
 	 * Maps the command options so they match the discord API closer
 	 * @param options The options to match
@@ -81,9 +81,9 @@ export abstract class BaseCommand<T extends Client = Client> {
 		return options?.map(({ type, name, description, required, choices, options, autocomplete }) => {
 			const option: any = { type, name, description, autocomplete };
 
-			if (required)     option.required     = true;
-			if (choices)      option.choices      = choices;
-			if (options)      option.options      = this.mapOptions(options, false);
+			if (required) option.required = true;
+			if (choices) option.choices = choices;
+			if (options) option.options = this.mapOptions(options, false);
 			if (autocomplete) option.autocomplete = true;
 
 			return option;

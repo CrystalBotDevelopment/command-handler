@@ -15,10 +15,10 @@ export abstract class SubcommandGroup<T extends Client = Client> extends Command
 	//	@ts-ignore
 	public readonly options: APIApplicationCommandOption[] = [];
 
-	
+
 	public constructor(command: Command<T>) {
 		super();
-		this.client  = command.client;
+		this.client = command.client;
 		this.command = command;
 	}
 

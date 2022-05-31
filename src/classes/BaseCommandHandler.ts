@@ -10,16 +10,16 @@ import { Command } from './commands/Command';
 type Any = any | void | Promise<any | void>;
 
 interface Events {
-	started: [ command: Command ]
-	created: [ command: Command ]
-	deleted: [ command: ApplicationCommand ]
-	updated: [ command: Command ]
+	started: [command: Command]
+	created: [command: Command]
+	deleted: [command: ApplicationCommand]
+	updated: [command: Command]
 }
 
 export interface BaseCommandHandler {
-	on<K extends keyof Events>(event: K, listener: (...args: Events[K]) => Any) : this
-	once<K extends keyof Events>(event: K, listener: (...args: Events[K]) => Any) : this
-	emit<K extends keyof Events>(event: K, ...args: Events[K]) : boolean
+	on<K extends keyof Events>(event: K, listener: (...args: Events[K]) => Any): this
+	once<K extends keyof Events>(event: K, listener: (...args: Events[K]) => Any): this
+	emit<K extends keyof Events>(event: K, ...args: Events[K]): boolean
 }
 
 export abstract class BaseCommandHandler extends EventEmitter {
@@ -38,9 +38,9 @@ export abstract class BaseCommandHandler extends EventEmitter {
 	 */
 	public constructor(botToken?: string, clientId?: Snowflake, guildId?: Snowflake) {
 		super();
-		if(clientId) this.clientId = clientId;
-		if(guildId) this.guildId = guildId;
-		if(botToken) this.b_restAPI.setToken(botToken);
+		if (clientId) this.clientId = clientId;
+		if (guildId) this.guildId = guildId;
+		if (botToken) this.b_restAPI.setToken(botToken);
 	}
 
 	/**
@@ -51,7 +51,7 @@ export abstract class BaseCommandHandler extends EventEmitter {
 
 		const files = directoryScanner(dir, recursive);
 		const commands = getCommands(files)
-			.map(c=> {
+			.map(c => {
 				const cmd = this._startCommand(c);
 				this.emit('started', cmd);
 				return cmd;
@@ -82,7 +82,7 @@ export abstract class BaseCommandHandler extends EventEmitter {
 			: Routes.applicationCommands(this.clientId);
 
 		const commands = await this.b_restAPI.get(route as any as `/${string}`) as APIApplicationCommand[];
-		return new Collection(commands.map(c=>[c.name.toLowerCase(), c]));
+		return new Collection(commands.map(c => [c.name.toLowerCase(), c]));
 	}
 
 
@@ -162,7 +162,7 @@ export abstract class BaseCommandHandler extends EventEmitter {
 	 * @param cmd The ApplicationCommand to transform
 	 * @returns transformed ApplicationCommand
 	 */
-	protected _transformApplicationCommand( cmd: APIApplicationCommand ): ApplicationCommand {
+	protected _transformApplicationCommand(cmd: APIApplicationCommand): ApplicationCommand {
 		return {
 			name: cmd.name,
 			description: cmd.description,
