@@ -6,7 +6,8 @@ class Subcommand extends BaseCommand_1.BaseCommand {
     type = 1;
     command;
     constructor(command) {
-        super(command.client);
+        super();
+        this.client = command.client;
         this.command = command;
     }
     toJSON() {

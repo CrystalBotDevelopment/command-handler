@@ -22,7 +22,7 @@ class Command extends BaseCommand_1.BaseCommand {
         this.loadSubcommand(command);
     }
     loadSubcommandsFromDir(dir, recursive = false) {
-        const files = directoryScanner_1.directoryScanner(dir, recursive, this.extension);
+        const files = (0, directoryScanner_1.directoryScanner)(dir, recursive, this.extension);
         for (const file of files) {
             this.loadSubcommandFromPath(file);
         }

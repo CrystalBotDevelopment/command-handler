@@ -7,7 +7,7 @@ function getCommands(files) {
     const commands = new Array();
     for (const file of files) {
         const data = getCommand(file);
-        if (!utils_1.isConstructorOf(data, Command_1.Command))
+        if (!(0, utils_1.isConstructorOf)(data, Command_1.Command))
             throw new Error(`File ${file} does not defaulty export a Command type`);
         commands.push(data);
     }

@@ -12,7 +12,7 @@ exports.defaultCommandHandlerOptions = {
     guildId: undefined,
     handleError: async (err, interaction) => {
         console.log(err);
-        if (interaction.replied)
+        if (interaction.replied || interaction.deferred)
             await interaction.editReply('An error happened while executing this command!' + '\n```\n' + err.message + '\n```');
         else
             await interaction.reply('An error happened while executing this command!' + '\n```\n' + err.message + '\n```');
@@ -52,6 +52,7 @@ class CommandHandler extends BaseCommandHandler_1.BaseCommandHandler {
         const applicationCommands = await this.getApplicationCommands();
         for (const command of this.commands) {
             let applicationCommand = applicationCommands.get(command.name.toLowerCase());
+            console.log(applicationCommand, command.toJSON());
             applicationCommands.delete(applicationCommand?.name ?? '');
             const rawCmd = command.toJSON();
             if (!applicationCommand) {
@@ -59,7 +60,7 @@ class CommandHandler extends BaseCommandHandler_1.BaseCommandHandler {
                     continue;
                 applicationCommand = await this._createCommand(command);
             }
-            else if (!objectCompare_1.objectCompare(rawCmd, this._transformApplicationCommand(applicationCommand))) {
+            else if (!(0, objectCompare_1.objectCompare)(rawCmd, this._transformApplicationCommand(applicationCommand))) {
                 if (!this.options.updateCommands)
                     continue;
                 applicationCommand = await this._updateCommand(command, applicationCommand);
@@ -83,6 +84,7 @@ class CommandHandler extends BaseCommandHandler_1.BaseCommandHandler {
     }
     _startCommand(constructor) {
         const c = new constructor();
+        c.client = this.client;
         c.onStart();
         return c;
     }

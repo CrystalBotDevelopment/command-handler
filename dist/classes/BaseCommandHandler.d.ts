@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { APIApplicationCommand, Snowflake } from 'discord-api-types/v9';
 import { Collection } from 'discord.js';
 import { EventEmitter } from 'events';

@@ -22,8 +22,8 @@ class BaseCommandHandler extends events_1.EventEmitter {
             this.b_restAPI.setToken(botToken);
     }
     loadFromDirectory(dir, recursive = true) {
-        const files = directoryScanner_1.directoryScanner(dir, recursive);
-        const commands = getCommands_1.getCommands(files)
+        const files = (0, directoryScanner_1.directoryScanner)(dir, recursive);
+        const commands = (0, getCommands_1.getCommands)(files)
             .map(c => {
             const cmd = this._startCommand(c);
             this.emit('started', cmd);

@@ -80,7 +80,7 @@ export abstract class Command<T extends Client = Client> extends BaseCommand<T> 
 	 */
 	private _getSubCMD(type: 'getSubcommand' | 'getSubcommandGroup', interaction: CommandInteraction): string {
 		try {
-			return interaction.options[type]();
+			return (interaction.options as any)[type]();
 		}
 		// eslint-disable-next-line no-empty
 		catch {}

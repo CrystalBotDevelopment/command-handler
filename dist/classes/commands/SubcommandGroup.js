@@ -6,7 +6,8 @@ class SubcommandGroup extends Command_1.Command {
     type = 2;
     command;
     constructor(command) {
-        super(command.client);
+        super();
+        this.client = command.client;
         this.command = command;
     }
     toJSON() {

@@ -10,7 +10,7 @@ const utils_1 = require("./utils");
 function directoryScanner(dir, recursive, extension = 'command') {
     if (!/^\w+$/.test(extension))
         throw new Error('Extension must match /$\\w+^/');
-    const root = utils_1.fullPath(dir);
+    const root = (0, utils_1.fullPath)(dir);
     const files = new Array();
     fs_1.default.readdirSync(root).forEach(file => {
         const path = path_1.default.join(root, file);

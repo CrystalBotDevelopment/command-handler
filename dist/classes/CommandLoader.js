@@ -25,7 +25,7 @@ class CommandLoader extends BaseCommandHandler_1.BaseCommandHandler {
                     continue;
                 applicationCommand = await this._createCommand(command);
             }
-            else if (!objectCompare_1.objectCompare(rawCmd, applicationCommand)) {
+            else if (!(0, objectCompare_1.objectCompare)(rawCmd, applicationCommand)) {
                 if (!this._options.updateCommands)
                     continue;
                 applicationCommand = await this._updateCommand(command, applicationCommand);
