@@ -1,4 +1,4 @@
-import SysPath from 'path';
+import * as SysPath from 'node:path';
 import { Constructor } from '../types';
 
 /**

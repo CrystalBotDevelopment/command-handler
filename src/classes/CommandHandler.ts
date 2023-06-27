@@ -56,8 +56,8 @@ export const defaultCommandHandlerOptions: CommandHandlerOptions = {
 	guildId: undefined,
 	handleError: async (err, interaction) => {
 		console.log(err);
-		if(interaction.replied || interaction.deferred) await interaction.editReply('An error happened while executing this command!'+'\n```\n'+err.message+'\n```');
-		else await interaction.reply('An error happened while executing this command!'+'\n```\n'+err.message+'\n```');
+		if (interaction.replied || interaction.deferred) await interaction.editReply('An error happened while executing this command!' + '\n```\n' + err.message + '\n```');
+		else await interaction.reply('An error happened while executing this command!' + '\n```\n' + err.message + '\n```');
 	}
 };
 
@@ -88,8 +88,8 @@ export class CommandHandler<T extends Client<true> = Client<true>> extends BaseC
 	 */
 	constructor(client: T, options: CommandHandlerOptions = {}) {
 		const parsedOptions = Object.assign({}, defaultCommandHandlerOptions, options) as InversePartial<CommandHandlerOptions>;
+		super(client.token, undefined, options.guildId);
 
-		super(client.token, undefined, parsedOptions.guildId);
 		this.client = client;
 		this.options = parsedOptions;
 	}
@@ -101,14 +101,14 @@ export class CommandHandler<T extends Client<true> = Client<true>> extends BaseC
 	 */
 	public async runCommand(interaction: CommandInteraction): Promise<boolean> {
 		const command = this.commandById.get(interaction.commandId);
-		if(!command) return false;
+		if (!command) return false;
 
 		try {
-			if(this.options.autoDefer) await interaction.deferReply();
+			if (this.options.autoDefer) await interaction.deferReply();
 			await command.run(interaction);
 		}
-		catch(err: any) {
-			if(err instanceof CommandError)
+		catch (err: any) {
+			if (err instanceof CommandError)
 				await CommandError.handleError(err, interaction);
 			else await this.options.handleError(err, interaction);
 		}
@@ -124,7 +124,7 @@ export class CommandHandler<T extends Client<true> = Client<true>> extends BaseC
 
 		const applicationCommands = await this.getApplicationCommands();
 
-		for(const command of this.commands) {
+		for (const command of this.commands) {
 			let applicationCommand = applicationCommands.get(command.name.toLowerCase());
 
 			console.log(applicationCommand, command.toJSON());
@@ -135,15 +135,15 @@ export class CommandHandler<T extends Client<true> = Client<true>> extends BaseC
 
 			//	Creating
 
-			if(!applicationCommand) {
-				if(!this.options.createCommands) continue;
+			if (!applicationCommand) {
+				if (!this.options.createCommands) continue;
 				applicationCommand = await this._createCommand(command);
 			}
 
 			//	Updating
 
-			else if(!objectCompare(rawCmd, this._transformApplicationCommand(applicationCommand))) {
-				if(!this.options.updateCommands) continue;
+			else if (!objectCompare(rawCmd, this._transformApplicationCommand(applicationCommand))) {
+				if (!this.options.updateCommands) continue;
 				applicationCommand = await this._updateCommand(command, applicationCommand);
 			}
 
@@ -153,8 +153,8 @@ export class CommandHandler<T extends Client<true> = Client<true>> extends BaseC
 
 		//	Deleting commands
 
-		if(this.options.deleteCommands) {
-			for(const [key, value] of applicationCommands) {
+		if (this.options.deleteCommands) {
+			for (const [key, value] of applicationCommands) {
 				key; await this._deleteCommand(value);
 			}
 		}
@@ -166,8 +166,8 @@ export class CommandHandler<T extends Client<true> = Client<true>> extends BaseC
 	 * Delete all of the commands
 	 */
 	public async deleteAllCommands(): Promise<void> {
-		for(const [_, applicationCommand] of await this.getApplicationCommands()) {
-			_; await this._deleteCommand(applicationCommand);
+		for (const [_, applicationCommand] of await this.getApplicationCommands()) {
+			await this._deleteCommand(applicationCommand);
 		}
 	}
 

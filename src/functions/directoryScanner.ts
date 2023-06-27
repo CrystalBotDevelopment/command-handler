@@ -1,5 +1,5 @@
-import FS from 'fs';
-import SysPath from 'path';
+import * as FS from 'fs';
+import * as SysPath from 'path';
 import { fullPath } from './utils';
 
 /**

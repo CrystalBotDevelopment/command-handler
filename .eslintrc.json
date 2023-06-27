@@ -43,5 +43,6 @@
         "@typescript-eslint/no-namespace": "off",
         "no-duplicate-imports": "warn",
         "@typescript-eslint/no-non-null-assertion": "off"
-    }
+    },
+    "ignorePatterns": ["node_modules"]
 }

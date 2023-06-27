@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js';
 import { SubcommandGroup } from '../../../../src';
-import Path from 'path';
+import * as Path from 'path';
 
 
 export default class Something extends SubcommandGroup {

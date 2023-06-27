@@ -38,7 +38,7 @@ const obj: { [key: string]: APIApplicationCommand } = {
 			{ type: 1, name: 'test', description: 'Test' },
 		]
 	}
-}
+};
 
 Object.freeze(obj);
 
@@ -73,7 +73,7 @@ function queryChange(object: Object | any[], data: any): void {
 
 	Object.entries(data).forEach(([ i, v ]) => {
 		//	@ts-ignore
-		queryChange(object[i], v)
+		queryChange(object[i], v);
 	});
 
 }
