@@ -4,7 +4,7 @@ import { CommandInteraction, InteractionReplyOptions } from 'discord.js';
 export class CommandError extends Error {
 
 	public static async handleError(error: CommandError, interaction: CommandInteraction): Promise<void> {
-		if(interaction.replied) {
+		if(interaction.replied || interaction.deferred) {
 			await interaction.editReply(error.options);
 		} else {
 			await interaction.reply(error.options);
