@@ -88,6 +88,7 @@ export abstract class CommandWithLoader<T extends Client = Client> extends BaseC
 	 */
 	private _getSubCMD(type: 'getSubcommand' | 'getSubcommandGroup', interaction: CommandInteraction): string {
 		try {
+			//@ts-ignore
 			return interaction.options[type]();
 		}
 		// eslint-disable-next-line no-empty

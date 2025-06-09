@@ -1,4 +1,4 @@
-import { CommandInteraction, InteractionReplyOptions } from 'discord.js';
+import { CommandInteraction, InteractionReplyOptions, MessageFlags } from 'discord.js';
 
 
 export class CommandError extends Error {
@@ -18,9 +18,10 @@ export class CommandError extends Error {
 		super('An error happened while executing this command.');
 
 		if(typeof options === 'string')
-			options = { content: options, ephemeral: true};
+			options = { content: options, flags: MessageFlags.Ephemeral};
 		else if(typeof options.ephemeral == 'undefined')
-			options.ephemeral = true;
+			//	@ts-ignore
+			options.flags = (options.flags ?? 0) | MessageFlags.Ephemeral;
 
 		this.options = options;
 	}
